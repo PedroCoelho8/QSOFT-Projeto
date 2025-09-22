@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PetRestController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">spring-petclinic-rest</a> &gt; <a href="index.source.html" class="el_package">org.springframework.samples.petclinic.rest.controller</a> &gt; <span class="el_source">PetRestController.java</span></div><h1>PetRestController.java</h1><pre class="source lang-java linenums">/*
+ * Copyright 2016-2017 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package org.springframework.samples.petclinic.rest.controller;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.samples.petclinic.mapper.PetMapper;
+import org.springframework.samples.petclinic.model.Pet;
+import org.springframework.samples.petclinic.rest.api.PetsApi;
+import org.springframework.samples.petclinic.rest.dto.PetDto;
+import org.springframework.samples.petclinic.service.ClinicService;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * @author Vitaliy Fedoriv
+ */
+
+@RestController
+@CrossOrigin(exposedHeaders = &quot;errors, content-type&quot;)
+@RequestMapping(&quot;api&quot;)
+public class PetRestController implements PetsApi {
+
+    private final ClinicService clinicService;
+
+    private final PetMapper petMapper;
+
+<span class="fc" id="L47">    public PetRestController(ClinicService clinicService, PetMapper petMapper) {</span>
+<span class="fc" id="L48">        this.clinicService = clinicService;</span>
+<span class="fc" id="L49">        this.petMapper = petMapper;</span>
+<span class="fc" id="L50">    }</span>
+
+    @Override
+    public ResponseEntity&lt;PetDto&gt; getPet(Integer petId) {
+<span class="fc" id="L54">        PetDto pet = petMapper.toPetDto(this.clinicService.findPetById(petId));</span>
+<span class="fc bfc" id="L55" title="All 2 branches covered.">        if (pet == null) {</span>
+<span class="fc" id="L56">            return new ResponseEntity&lt;&gt;(HttpStatus.NOT_FOUND);</span>
+        }
+<span class="fc" id="L58">        return new ResponseEntity&lt;&gt;(pet, HttpStatus.OK);</span>
+    }
+
+    @Override
+    public ResponseEntity&lt;List&lt;PetDto&gt;&gt; listPets() {
+<span class="fc" id="L63">        List&lt;PetDto&gt; pets = new ArrayList&lt;&gt;(petMapper.toPetsDto(this.clinicService.findAllPets()));</span>
+<span class="fc bfc" id="L64" title="All 2 branches covered.">        if (pets.isEmpty()) {</span>
+<span class="fc" id="L65">            return new ResponseEntity&lt;&gt;(HttpStatus.NOT_FOUND);</span>
+        }
+<span class="fc" id="L67">        return new ResponseEntity&lt;&gt;(pets, HttpStatus.OK);</span>
+    }
+
+
+    @Override
+    public ResponseEntity&lt;PetDto&gt; updatePet(Integer petId, PetDto petDto) {
+<span class="fc" id="L73">        Pet currentPet = this.clinicService.findPetById(petId);</span>
+<span class="pc bpc" id="L74" title="1 of 2 branches missed.">        if (currentPet == null) {</span>
+<span class="nc" id="L75">            return new ResponseEntity&lt;&gt;(HttpStatus.NOT_FOUND);</span>
+        }
+<span class="fc" id="L77">        currentPet.setBirthDate(petDto.getBirthDate());</span>
+<span class="fc" id="L78">        currentPet.setName(petDto.getName());</span>
+<span class="fc" id="L79">        currentPet.setType(petMapper.toPetType(petDto.getType()));</span>
+<span class="fc" id="L80">        this.clinicService.savePet(currentPet);</span>
+<span class="fc" id="L81">        return new ResponseEntity&lt;&gt;(petMapper.toPetDto(currentPet), HttpStatus.NO_CONTENT);</span>
+    }
+
+    @Override
+    public ResponseEntity&lt;PetDto&gt; deletePet(Integer petId) {
+<span class="fc" id="L86">        Pet pet = this.clinicService.findPetById(petId);</span>
+<span class="fc bfc" id="L87" title="All 2 branches covered.">        if (pet == null) {</span>
+<span class="fc" id="L88">            return new ResponseEntity&lt;&gt;(HttpStatus.NOT_FOUND);</span>
+        }
+<span class="fc" id="L90">        this.clinicService.deletePet(pet);</span>
+<span class="fc" id="L91">        return new ResponseEntity&lt;&gt;(HttpStatus.NO_CONTENT);</span>
+    }
+
+    @Override
+    public ResponseEntity&lt;PetDto&gt; addPet(PetDto petDto) {
+<span class="fc" id="L96">        this.clinicService.savePet(petMapper.toPet(petDto));</span>
+<span class="fc" id="L97">        return new ResponseEntity&lt;&gt;(petDto, HttpStatus.OK);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

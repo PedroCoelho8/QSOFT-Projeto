@@ -1,0 +1,54 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (pet(); as petRef) {
+      <div>
+        <h2 data-cy="petDetailsHeading"><span>Pet</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span>ID</span></dt>
+          <dd>
+            <span>{{ petRef.id }}</span>
+          </dd>
+          <dt><span>Name</span></dt>
+          <dd>
+            <span>{{ petRef.name }}</span>
+          </dd>
+          <dt><span>Birth Date</span></dt>
+          <dd>
+            <span>{{ petRef.birthDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span>Owner</span></dt>
+          <dd>
+            @if (pet()!.owner) {
+              <div>
+                <a [routerLink]="['/owner', pet()!.owner?.id, 'view']">{{ petRef.owner?.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span>Pet Type</span></dt>
+          <dd>
+            @if (pet()!.petType) {
+              <div>
+                <a [routerLink]="['/pet-type', pet()!.petType?.id, 'view']">{{ petRef.petType?.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/pet', petRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

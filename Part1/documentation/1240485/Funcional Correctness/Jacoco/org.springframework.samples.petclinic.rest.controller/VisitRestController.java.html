@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>VisitRestController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">spring-petclinic-rest</a> &gt; <a href="index.source.html" class="el_package">org.springframework.samples.petclinic.rest.controller</a> &gt; <span class="el_source">VisitRestController.java</span></div><h1>VisitRestController.java</h1><pre class="source lang-java linenums">/*
+ * Copyright 2016-2017 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package org.springframework.samples.petclinic.rest.controller;
+
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.samples.petclinic.mapper.VisitMapper;
+import org.springframework.samples.petclinic.model.Visit;
+import org.springframework.samples.petclinic.rest.api.VisitsApi;
+import org.springframework.samples.petclinic.rest.dto.VisitDto;
+import org.springframework.samples.petclinic.service.ClinicService;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
+
+import jakarta.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * @author Vitaliy Fedoriv
+ */
+
+@RestController
+@CrossOrigin(exposedHeaders = &quot;errors, content-type&quot;)
+@RequestMapping(&quot;api&quot;)
+public class VisitRestController implements VisitsApi {
+
+    private final ClinicService clinicService;
+
+    private final VisitMapper visitMapper;
+
+<span class="fc" id="L48">    public VisitRestController(ClinicService clinicService, VisitMapper visitMapper) {</span>
+<span class="fc" id="L49">        this.clinicService = clinicService;</span>
+<span class="fc" id="L50">        this.visitMapper = visitMapper;</span>
+<span class="fc" id="L51">    }</span>
+
+
+    @Override
+    public ResponseEntity&lt;List&lt;VisitDto&gt;&gt; listVisits() {
+<span class="fc" id="L56">        List&lt;Visit&gt; visits = new ArrayList&lt;&gt;(this.clinicService.findAllVisits());</span>
+<span class="fc bfc" id="L57" title="All 2 branches covered.">        if (visits.isEmpty()) {</span>
+<span class="fc" id="L58">            return new ResponseEntity&lt;&gt;(HttpStatus.NOT_FOUND);</span>
+        }
+<span class="fc" id="L60">        return new ResponseEntity&lt;&gt;(new ArrayList&lt;&gt;(visitMapper.toVisitsDto(visits)), HttpStatus.OK);</span>
+    }
+
+    @Override
+    public ResponseEntity&lt;VisitDto&gt; getVisit( Integer visitId) {
+<span class="fc" id="L65">        Visit visit = this.clinicService.findVisitById(visitId);</span>
+<span class="fc bfc" id="L66" title="All 2 branches covered.">        if (visit == null) {</span>
+<span class="fc" id="L67">            return new ResponseEntity&lt;&gt;(HttpStatus.NOT_FOUND);</span>
+        }
+<span class="fc" id="L69">        return new ResponseEntity&lt;&gt;(visitMapper.toVisitDto(visit), HttpStatus.OK);</span>
+    }
+
+    @Override
+    public ResponseEntity&lt;VisitDto&gt; addVisit(VisitDto visitDto) {
+<span class="fc" id="L74">        HttpHeaders headers = new HttpHeaders();</span>
+<span class="fc" id="L75">        Visit visit = visitMapper.toVisit(visitDto);</span>
+<span class="fc" id="L76">        this.clinicService.saveVisit(visit);</span>
+<span class="fc" id="L77">        visitDto = visitMapper.toVisitDto(visit);</span>
+<span class="fc" id="L78">        headers.setLocation(UriComponentsBuilder.newInstance().path(&quot;/api/visits/{id}&quot;).buildAndExpand(visit.getId()).toUri());</span>
+<span class="fc" id="L79">        return new ResponseEntity&lt;&gt;(visitDto, headers, HttpStatus.CREATED);</span>
+    }
+
+    @Override
+    public ResponseEntity&lt;VisitDto&gt; updateVisit(Integer visitId, VisitDto visitDto) {
+<span class="fc" id="L84">        Visit currentVisit = this.clinicService.findVisitById(visitId);</span>
+<span class="pc bpc" id="L85" title="1 of 2 branches missed.">        if (currentVisit == null) {</span>
+<span class="nc" id="L86">            return new ResponseEntity&lt;&gt;(HttpStatus.NOT_FOUND);</span>
+        }
+<span class="fc" id="L88">        currentVisit.setDate(visitDto.getDate());</span>
+<span class="fc" id="L89">        currentVisit.setDescription(visitDto.getDescription());</span>
+<span class="fc" id="L90">        this.clinicService.saveVisit(currentVisit);</span>
+<span class="fc" id="L91">        return new ResponseEntity&lt;&gt;(visitMapper.toVisitDto(currentVisit), HttpStatus.NO_CONTENT);</span>
+    }
+
+    @Transactional
+    @Override
+    public ResponseEntity&lt;VisitDto&gt; deleteVisit(Integer visitId) {
+<span class="fc" id="L97">        Visit visit = this.clinicService.findVisitById(visitId);</span>
+<span class="fc bfc" id="L98" title="All 2 branches covered.">        if (visit == null) {</span>
+<span class="fc" id="L99">            return new ResponseEntity&lt;&gt;(HttpStatus.NOT_FOUND);</span>
+        }
+<span class="fc" id="L101">        this.clinicService.deleteVisit(visit);</span>
+<span class="fc" id="L102">        return new ResponseEntity&lt;&gt;(HttpStatus.NO_CONTENT);</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

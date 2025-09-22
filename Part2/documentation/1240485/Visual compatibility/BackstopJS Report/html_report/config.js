@@ -1,0 +1,420 @@
+report({
+  "testSuite": "BackstopJS",
+  "tests": [
+    {
+      "pair": {
+        "reference": "..\\bitmaps_reference\\backstop_default_List_PetTypes_0_document_0_small-phone.png",
+        "test": "..\\bitmaps_test\\20241202-154637\\backstop_default_List_PetTypes_0_document_0_small-phone.png",
+        "selector": "document",
+        "fileName": "backstop_default_List_PetTypes_0_document_0_small-phone.png",
+        "label": "List PetTypes",
+        "requireSameDimensions": true,
+        "misMatchThreshold": 0.1,
+        "url": "http://localhost:8080/pet-type",
+        "expect": 0,
+        "viewportLabel": "small-phone",
+        "diff": {
+          "isSameDimensions": true,
+          "dimensionDifference": {
+            "width": 0,
+            "height": 0
+          },
+          "misMatchPercentage": "0.00"
+        }
+      },
+      "status": "pass"
+    },
+    {
+      "pair": {
+        "reference": "..\\bitmaps_reference\\backstop_default_List_PetTypes_0_document_1_medium-phone.png",
+        "test": "..\\bitmaps_test\\20241202-154637\\backstop_default_List_PetTypes_0_document_1_medium-phone.png",
+        "selector": "document",
+        "fileName": "backstop_default_List_PetTypes_0_document_1_medium-phone.png",
+        "label": "List PetTypes",
+        "requireSameDimensions": true,
+        "misMatchThreshold": 0.1,
+        "url": "http://localhost:8080/pet-type",
+        "expect": 0,
+        "viewportLabel": "medium-phone",
+        "diff": {
+          "isSameDimensions": true,
+          "dimensionDifference": {
+            "width": 0,
+            "height": 0
+          },
+          "misMatchPercentage": "0.00"
+        }
+      },
+      "status": "pass"
+    },
+    {
+      "pair": {
+        "reference": "..\\bitmaps_reference\\backstop_default_List_PetTypes_0_document_2_large-phone.png",
+        "test": "..\\bitmaps_test\\20241202-154637\\backstop_default_List_PetTypes_0_document_2_large-phone.png",
+        "selector": "document",
+        "fileName": "backstop_default_List_PetTypes_0_document_2_large-phone.png",
+        "label": "List PetTypes",
+        "requireSameDimensions": true,
+        "misMatchThreshold": 0.1,
+        "url": "http://localhost:8080/pet-type",
+        "expect": 0,
+        "viewportLabel": "large-phone",
+        "diff": {
+          "isSameDimensions": true,
+          "dimensionDifference": {
+            "width": 0,
+            "height": 0
+          },
+          "misMatchPercentage": "0.00"
+        }
+      },
+      "status": "pass"
+    },
+    {
+      "pair": {
+        "reference": "..\\bitmaps_reference\\backstop_default_List_PetTypes_0_document_3_small-tablet.png",
+        "test": "..\\bitmaps_test\\20241202-154637\\backstop_default_List_PetTypes_0_document_3_small-tablet.png",
+        "selector": "document",
+        "fileName": "backstop_default_List_PetTypes_0_document_3_small-tablet.png",
+        "label": "List PetTypes",
+        "requireSameDimensions": true,
+        "misMatchThreshold": 0.1,
+        "url": "http://localhost:8080/pet-type",
+        "expect": 0,
+        "viewportLabel": "small-tablet",
+        "diff": {
+          "isSameDimensions": true,
+          "dimensionDifference": {
+            "width": 0,
+            "height": 0
+          },
+          "misMatchPercentage": "0.00"
+        }
+      },
+      "status": "pass"
+    },
+    {
+      "pair": {
+        "reference": "..\\bitmaps_reference\\backstop_default_List_PetTypes_0_document_4_medium-tablet.png",
+        "test": "..\\bitmaps_test\\20241202-154637\\backstop_default_List_PetTypes_0_document_4_medium-tablet.png",
+        "selector": "document",
+        "fileName": "backstop_default_List_PetTypes_0_document_4_medium-tablet.png",
+        "label": "List PetTypes",
+        "requireSameDimensions": true,
+        "misMatchThreshold": 0.1,
+        "url": "http://localhost:8080/pet-type",
+        "expect": 0,
+        "viewportLabel": "medium-tablet",
+        "diff": {
+          "isSameDimensions": true,
+          "dimensionDifference": {
+            "width": 0,
+            "height": 0
+          },
+          "misMatchPercentage": "0.00"
+        }
+      },
+      "status": "pass"
+    },
+    {
+      "pair": {
+        "reference": "..\\bitmaps_reference\\backstop_default_List_PetTypes_0_document_5_large-tablet.png",
+        "test": "..\\bitmaps_test\\20241202-154637\\backstop_default_List_PetTypes_0_document_5_large-tablet.png",
+        "selector": "document",
+        "fileName": "backstop_default_List_PetTypes_0_document_5_large-tablet.png",
+        "label": "List PetTypes",
+        "requireSameDimensions": true,
+        "misMatchThreshold": 0.1,
+        "url": "http://localhost:8080/pet-type",
+        "expect": 0,
+        "viewportLabel": "large-tablet",
+        "diff": {
+          "isSameDimensions": true,
+          "dimensionDifference": {
+            "width": 0,
+            "height": 0
+          },
+          "misMatchPercentage": "0.00"
+        }
+      },
+      "status": "pass"
+    },
+    {
+      "pair": {
+        "reference": "..\\bitmaps_reference\\backstop_default_List_PetTypes_0_document_6_small-desktop.png",
+        "test": "..\\bitmaps_test\\20241202-154637\\backstop_default_List_PetTypes_0_document_6_small-desktop.png",
+        "selector": "document",
+        "fileName": "backstop_default_List_PetTypes_0_document_6_small-desktop.png",
+        "label": "List PetTypes",
+        "requireSameDimensions": true,
+        "misMatchThreshold": 0.1,
+        "url": "http://localhost:8080/pet-type",
+        "expect": 0,
+        "viewportLabel": "small-desktop",
+        "diff": {
+          "isSameDimensions": true,
+          "dimensionDifference": {
+            "width": 0,
+            "height": 0
+          },
+          "misMatchPercentage": "0.00"
+        }
+      },
+      "status": "pass"
+    },
+    {
+      "pair": {
+        "reference": "..\\bitmaps_reference\\backstop_default_List_PetTypes_0_document_7_medium-desktop.png",
+        "test": "..\\bitmaps_test\\20241202-154637\\backstop_default_List_PetTypes_0_document_7_medium-desktop.png",
+        "selector": "document",
+        "fileName": "backstop_default_List_PetTypes_0_document_7_medium-desktop.png",
+        "label": "List PetTypes",
+        "requireSameDimensions": true,
+        "misMatchThreshold": 0.1,
+        "url": "http://localhost:8080/pet-type",
+        "expect": 0,
+        "viewportLabel": "medium-desktop",
+        "diff": {
+          "isSameDimensions": true,
+          "dimensionDifference": {
+            "width": 0,
+            "height": 0
+          },
+          "misMatchPercentage": "0.00"
+        }
+      },
+      "status": "pass"
+    },
+    {
+      "pair": {
+        "reference": "..\\bitmaps_reference\\backstop_default_List_PetTypes_0_document_8_large-desktop.png",
+        "test": "..\\bitmaps_test\\20241202-154637\\backstop_default_List_PetTypes_0_document_8_large-desktop.png",
+        "selector": "document",
+        "fileName": "backstop_default_List_PetTypes_0_document_8_large-desktop.png",
+        "label": "List PetTypes",
+        "requireSameDimensions": true,
+        "misMatchThreshold": 0.1,
+        "url": "http://localhost:8080/pet-type",
+        "expect": 0,
+        "viewportLabel": "large-desktop",
+        "diff": {
+          "isSameDimensions": true,
+          "dimensionDifference": {
+            "width": 0,
+            "height": 0
+          },
+          "misMatchPercentage": "0.00"
+        }
+      },
+      "status": "pass"
+    },
+    {
+      "pair": {
+        "reference": "..\\bitmaps_reference\\backstop_default_Visualise_PetTypes_0_document_0_small-phone.png",
+        "test": "..\\bitmaps_test\\20241202-154637\\backstop_default_Visualise_PetTypes_0_document_0_small-phone.png",
+        "selector": "document",
+        "fileName": "backstop_default_Visualise_PetTypes_0_document_0_small-phone.png",
+        "label": "Visualise PetTypes",
+        "requireSameDimensions": true,
+        "misMatchThreshold": 0.1,
+        "url": "http://localhost:8080/pet-type/1/view",
+        "expect": 0,
+        "viewportLabel": "small-phone",
+        "diff": {
+          "isSameDimensions": true,
+          "dimensionDifference": {
+            "width": 0,
+            "height": 0
+          },
+          "misMatchPercentage": "0.00"
+        }
+      },
+      "status": "pass"
+    },
+    {
+      "pair": {
+        "reference": "..\\bitmaps_reference\\backstop_default_Visualise_PetTypes_0_document_1_medium-phone.png",
+        "test": "..\\bitmaps_test\\20241202-154637\\backstop_default_Visualise_PetTypes_0_document_1_medium-phone.png",
+        "selector": "document",
+        "fileName": "backstop_default_Visualise_PetTypes_0_document_1_medium-phone.png",
+        "label": "Visualise PetTypes",
+        "requireSameDimensions": true,
+        "misMatchThreshold": 0.1,
+        "url": "http://localhost:8080/pet-type/1/view",
+        "expect": 0,
+        "viewportLabel": "medium-phone",
+        "diff": {
+          "isSameDimensions": true,
+          "dimensionDifference": {
+            "width": 0,
+            "height": 0
+          },
+          "misMatchPercentage": "0.00"
+        }
+      },
+      "status": "pass"
+    },
+    {
+      "pair": {
+        "reference": "..\\bitmaps_reference\\backstop_default_Visualise_PetTypes_0_document_2_large-phone.png",
+        "test": "..\\bitmaps_test\\20241202-154637\\backstop_default_Visualise_PetTypes_0_document_2_large-phone.png",
+        "selector": "document",
+        "fileName": "backstop_default_Visualise_PetTypes_0_document_2_large-phone.png",
+        "label": "Visualise PetTypes",
+        "requireSameDimensions": true,
+        "misMatchThreshold": 0.1,
+        "url": "http://localhost:8080/pet-type/1/view",
+        "expect": 0,
+        "viewportLabel": "large-phone",
+        "diff": {
+          "isSameDimensions": true,
+          "dimensionDifference": {
+            "width": 0,
+            "height": 0
+          },
+          "misMatchPercentage": "0.00"
+        }
+      },
+      "status": "pass"
+    },
+    {
+      "pair": {
+        "reference": "..\\bitmaps_reference\\backstop_default_Visualise_PetTypes_0_document_3_small-tablet.png",
+        "test": "..\\bitmaps_test\\20241202-154637\\backstop_default_Visualise_PetTypes_0_document_3_small-tablet.png",
+        "selector": "document",
+        "fileName": "backstop_default_Visualise_PetTypes_0_document_3_small-tablet.png",
+        "label": "Visualise PetTypes",
+        "requireSameDimensions": true,
+        "misMatchThreshold": 0.1,
+        "url": "http://localhost:8080/pet-type/1/view",
+        "expect": 0,
+        "viewportLabel": "small-tablet",
+        "diff": {
+          "isSameDimensions": true,
+          "dimensionDifference": {
+            "width": 0,
+            "height": 0
+          },
+          "misMatchPercentage": "0.00"
+        }
+      },
+      "status": "pass"
+    },
+    {
+      "pair": {
+        "reference": "..\\bitmaps_reference\\backstop_default_Visualise_PetTypes_0_document_4_medium-tablet.png",
+        "test": "..\\bitmaps_test\\20241202-154637\\backstop_default_Visualise_PetTypes_0_document_4_medium-tablet.png",
+        "selector": "document",
+        "fileName": "backstop_default_Visualise_PetTypes_0_document_4_medium-tablet.png",
+        "label": "Visualise PetTypes",
+        "requireSameDimensions": true,
+        "misMatchThreshold": 0.1,
+        "url": "http://localhost:8080/pet-type/1/view",
+        "expect": 0,
+        "viewportLabel": "medium-tablet",
+        "diff": {
+          "isSameDimensions": true,
+          "dimensionDifference": {
+            "width": 0,
+            "height": 0
+          },
+          "misMatchPercentage": "0.00"
+        }
+      },
+      "status": "pass"
+    },
+    {
+      "pair": {
+        "reference": "..\\bitmaps_reference\\backstop_default_Visualise_PetTypes_0_document_5_large-tablet.png",
+        "test": "..\\bitmaps_test\\20241202-154637\\backstop_default_Visualise_PetTypes_0_document_5_large-tablet.png",
+        "selector": "document",
+        "fileName": "backstop_default_Visualise_PetTypes_0_document_5_large-tablet.png",
+        "label": "Visualise PetTypes",
+        "requireSameDimensions": true,
+        "misMatchThreshold": 0.1,
+        "url": "http://localhost:8080/pet-type/1/view",
+        "expect": 0,
+        "viewportLabel": "large-tablet",
+        "diff": {
+          "isSameDimensions": true,
+          "dimensionDifference": {
+            "width": 0,
+            "height": 0
+          },
+          "misMatchPercentage": "0.00"
+        }
+      },
+      "status": "pass"
+    },
+    {
+      "pair": {
+        "reference": "..\\bitmaps_reference\\backstop_default_Visualise_PetTypes_0_document_6_small-desktop.png",
+        "test": "..\\bitmaps_test\\20241202-154637\\backstop_default_Visualise_PetTypes_0_document_6_small-desktop.png",
+        "selector": "document",
+        "fileName": "backstop_default_Visualise_PetTypes_0_document_6_small-desktop.png",
+        "label": "Visualise PetTypes",
+        "requireSameDimensions": true,
+        "misMatchThreshold": 0.1,
+        "url": "http://localhost:8080/pet-type/1/view",
+        "expect": 0,
+        "viewportLabel": "small-desktop",
+        "diff": {
+          "isSameDimensions": true,
+          "dimensionDifference": {
+            "width": 0,
+            "height": 0
+          },
+          "misMatchPercentage": "0.00"
+        }
+      },
+      "status": "pass"
+    },
+    {
+      "pair": {
+        "reference": "..\\bitmaps_reference\\backstop_default_Visualise_PetTypes_0_document_7_medium-desktop.png",
+        "test": "..\\bitmaps_test\\20241202-154637\\backstop_default_Visualise_PetTypes_0_document_7_medium-desktop.png",
+        "selector": "document",
+        "fileName": "backstop_default_Visualise_PetTypes_0_document_7_medium-desktop.png",
+        "label": "Visualise PetTypes",
+        "requireSameDimensions": true,
+        "misMatchThreshold": 0.1,
+        "url": "http://localhost:8080/pet-type/1/view",
+        "expect": 0,
+        "viewportLabel": "medium-desktop",
+        "diff": {
+          "isSameDimensions": true,
+          "dimensionDifference": {
+            "width": 0,
+            "height": 0
+          },
+          "misMatchPercentage": "0.00"
+        }
+      },
+      "status": "pass"
+    },
+    {
+      "pair": {
+        "reference": "..\\bitmaps_reference\\backstop_default_Visualise_PetTypes_0_document_8_large-desktop.png",
+        "test": "..\\bitmaps_test\\20241202-154637\\backstop_default_Visualise_PetTypes_0_document_8_large-desktop.png",
+        "selector": "document",
+        "fileName": "backstop_default_Visualise_PetTypes_0_document_8_large-desktop.png",
+        "label": "Visualise PetTypes",
+        "requireSameDimensions": true,
+        "misMatchThreshold": 0.1,
+        "url": "http://localhost:8080/pet-type/1/view",
+        "expect": 0,
+        "viewportLabel": "large-desktop",
+        "diff": {
+          "isSameDimensions": true,
+          "dimensionDifference": {
+            "width": 0,
+            "height": 0
+          },
+          "misMatchPercentage": "0.00"
+        }
+      },
+      "status": "pass"
+    }
+  ],
+  "id": "backstop_default"
+});

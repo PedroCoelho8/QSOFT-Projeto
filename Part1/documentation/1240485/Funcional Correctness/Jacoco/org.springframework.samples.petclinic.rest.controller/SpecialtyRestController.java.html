@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SpecialtyRestController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">spring-petclinic-rest</a> &gt; <a href="index.source.html" class="el_package">org.springframework.samples.petclinic.rest.controller</a> &gt; <span class="el_source">SpecialtyRestController.java</span></div><h1>SpecialtyRestController.java</h1><pre class="source lang-java linenums">/*
+ * Copyright 2016-2017 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package org.springframework.samples.petclinic.rest.controller;
+
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.samples.petclinic.mapper.SpecialtyMapper;
+import org.springframework.samples.petclinic.model.Specialty;
+import org.springframework.samples.petclinic.rest.api.SpecialtiesApi;
+import org.springframework.samples.petclinic.rest.dto.SpecialtyDto;
+import org.springframework.samples.petclinic.service.ClinicService;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
+
+import jakarta.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * @author Vitaliy Fedoriv
+ */
+
+@RestController
+@CrossOrigin(exposedHeaders = &quot;errors, content-type&quot;)
+@RequestMapping(&quot;api&quot;)
+public class SpecialtyRestController implements SpecialtiesApi {
+
+    private final ClinicService clinicService;
+
+    private final SpecialtyMapper specialtyMapper;
+
+<span class="fc" id="L48">    public SpecialtyRestController(ClinicService clinicService, SpecialtyMapper specialtyMapper) {</span>
+<span class="fc" id="L49">        this.clinicService = clinicService;</span>
+<span class="fc" id="L50">        this.specialtyMapper = specialtyMapper;</span>
+<span class="fc" id="L51">    }</span>
+
+    @Override
+    public ResponseEntity&lt;List&lt;SpecialtyDto&gt;&gt; listSpecialties() {
+<span class="fc" id="L55">        List&lt;SpecialtyDto&gt; specialties = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L56">        specialties.addAll(specialtyMapper.toSpecialtyDtos(this.clinicService.findAllSpecialties()));</span>
+<span class="fc bfc" id="L57" title="All 2 branches covered.">        if (specialties.isEmpty()) {</span>
+<span class="fc" id="L58">            return new ResponseEntity&lt;&gt;(HttpStatus.NOT_FOUND);</span>
+        }
+<span class="fc" id="L60">        return new ResponseEntity&lt;&gt;(specialties, HttpStatus.OK);</span>
+    }
+
+    @Override
+    public ResponseEntity&lt;SpecialtyDto&gt; getSpecialty(Integer specialtyId) {
+<span class="fc" id="L65">        Specialty specialty = this.clinicService.findSpecialtyById(specialtyId);</span>
+<span class="fc bfc" id="L66" title="All 2 branches covered.">        if (specialty == null) {</span>
+<span class="fc" id="L67">            return new ResponseEntity&lt;&gt;(HttpStatus.NOT_FOUND);</span>
+        }
+<span class="fc" id="L69">        return new ResponseEntity&lt;&gt;(specialtyMapper.toSpecialtyDto(specialty), HttpStatus.OK);</span>
+    }
+
+    @Override
+    public ResponseEntity&lt;SpecialtyDto&gt; addSpecialty(SpecialtyDto specialtyDto) {
+<span class="fc" id="L74">        HttpHeaders headers = new HttpHeaders();</span>
+<span class="fc" id="L75">        Specialty specialty = specialtyMapper.toSpecialty(specialtyDto);</span>
+<span class="fc" id="L76">        this.clinicService.saveSpecialty(specialty);</span>
+<span class="fc" id="L77">        headers.setLocation(UriComponentsBuilder.newInstance().path(&quot;/api/specialties/{id}&quot;).buildAndExpand(specialty.getId()).toUri());</span>
+<span class="fc" id="L78">        return new ResponseEntity&lt;&gt;(specialtyMapper.toSpecialtyDto(specialty), headers, HttpStatus.CREATED);</span>
+    }
+
+    @Override
+    public ResponseEntity&lt;SpecialtyDto&gt; updateSpecialty(Integer specialtyId, SpecialtyDto specialtyDto) {
+<span class="fc" id="L83">        Specialty currentSpecialty = this.clinicService.findSpecialtyById(specialtyId);</span>
+<span class="pc bpc" id="L84" title="1 of 2 branches missed.">        if (currentSpecialty == null) {</span>
+<span class="nc" id="L85">            return new ResponseEntity&lt;&gt;(HttpStatus.NOT_FOUND);</span>
+        }
+<span class="fc" id="L87">        currentSpecialty.setName(specialtyDto.getName());</span>
+<span class="fc" id="L88">        this.clinicService.saveSpecialty(currentSpecialty);</span>
+<span class="fc" id="L89">        return new ResponseEntity&lt;&gt;(specialtyMapper.toSpecialtyDto(currentSpecialty), HttpStatus.NO_CONTENT);</span>
+    }
+
+    @Transactional
+    @Override
+    public ResponseEntity&lt;SpecialtyDto&gt; deleteSpecialty(Integer specialtyId) {
+<span class="fc" id="L95">        Specialty specialty = this.clinicService.findSpecialtyById(specialtyId);</span>
+<span class="fc bfc" id="L96" title="All 2 branches covered.">        if (specialty == null) {</span>
+<span class="fc" id="L97">            return new ResponseEntity&lt;&gt;(HttpStatus.NOT_FOUND);</span>
+        }
+<span class="fc" id="L99">        this.clinicService.deleteSpecialty(specialty);</span>
+<span class="fc" id="L100">        return new ResponseEntity&lt;&gt;(HttpStatus.NO_CONTENT);</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

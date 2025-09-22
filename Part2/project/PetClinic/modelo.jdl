@@ -1,0 +1,40 @@
+entity Specialty {
+    name String required,
+}
+
+entity Vet {
+    firstName String required,
+    lastName String required,
+}
+
+entity Owner {
+    address String required,
+    city String required,
+    firstName String required,
+    lastName String required,
+    telephone String required,
+}
+entity Pet {
+    name String required,
+    birthDate ZonedDateTime required,
+}
+
+entity PetType {
+    name String required,
+}
+
+entity Visit {
+    description String required,
+    date ZonedDateTime required,
+}
+
+relationship ManyToOne {
+	Vet{specialty} to Specialty,
+    Pet{owner} to Owner,
+    Visit{pet} to Pet,
+    Pet{PetType} to PetType,
+}
+
+dto * with mapstruct
+paginate * with pagination
+service * with serviceClass
